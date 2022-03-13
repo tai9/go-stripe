@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"os"
+	"text/template"
 	"time"
 )
 
@@ -43,7 +43,7 @@ func (app *application) serve() error {
 		ReadHeaderTimeout: 5 * time.Second,
 		WriteTimeout:      10 * time.Second,
 	}
-	app.infoLog.Printf("Starting HTTP server in %s mode on port %d", app.config.env, app.config.port)
+	app.infoLog.Printf("Starting back end server in %s mode on port %d", app.config.env, app.config.port)
 
 	return srv.ListenAndServe()
 }
@@ -52,7 +52,7 @@ func main() {
 	var cfg config
 
 	flag.IntVar(&cfg.port, "port", 4000, "Server port to listen on")
-	flag.StringVar(&cfg.env, "env", "development", "Application enviroment {development|production}")
+	flag.StringVar(&cfg.env, "env", "development", "Application enviroment {development|production|maintenace}")
 	flag.StringVar(&cfg.api, "api", "http://localhost:4001", "URL to api")
 
 	flag.Parse()
